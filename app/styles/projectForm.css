@@ -1,0 +1,55 @@
+@reference "./globals.css";
+
+.project-form {
+  @apply max-w-3xl rounded-xl border border-white/10 bg-white/5 p-6;
+}
+
+.form-grid {
+  @apply grid gap-6 md:grid-cols-2;
+}
+
+.form-label {
+  @apply mb-2 block text-sm text-gray-300;
+}
+
+.form-input {
+  @apply w-full rounded-lg border border-white/10 bg-black/20
+    px-4 py-3 text-white outline-none
+    focus:border-teal-500;
+}
+
+.form-select {
+  @apply w-full rounded-lg border border-white/10
+    bg-[#24132f] px-4 py-3 text-white outline-none
+    focus:border-teal-500;
+}
+
+.form-textarea {
+  @apply w-full rounded-lg border border-white/10 bg-black/20
+    px-4 py-3 text-white outline-none
+    focus:border-teal-500;
+}
+
+.description-group {
+  @apply mt-6;
+}
+
+.form-actions {
+  @apply mt-8 flex justify-end gap-3;
+}
+
+.cancel-button {
+  @apply rounded-lg bg-white/5 px-5 py-3 text-gray-300
+    hover:bg-white/10;
+}
+
+.submit-button {
+  @apply rounded-lg bg-teal-600 px-5 py-3 font-medium text-white
+    hover:bg-teal-500;
+}
+
+.delete-project-button {
+  @apply rounded-lg bg-red-600 px-5 py-3 font-medium text-black
+    transition
+    hover:bg-red-100 hover:text-gray-700;
+}

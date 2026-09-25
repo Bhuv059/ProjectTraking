@@ -1,0 +1,115 @@
+@reference "./globals.css";
+
+/* =========================
+   Dashboard
+========================= */
+
+.dashboard-container {
+  @apply mb-6 w-full max-w-[680px];
+}
+
+.dashboard-header {
+  @apply mb-8;
+}
+
+.dashboard-title {
+  @apply text-3xl font-bold text-white;
+}
+
+.dashboard-description {
+  @apply mt-2 text-gray-400;
+}
+
+.dashboard-content {
+  @apply flex w-full flex-col gap-6;
+}
+
+/* =========================
+   Cards
+========================= */
+
+.stat-card {
+  @apply rounded-xl border border-white/10 bg-white/5 p-6;
+}
+
+.stat-label {
+  @apply text-sm text-gray-400;
+}
+
+.stat-value {
+  @apply mt-2 text-3xl font-bold text-white;
+}
+
+/* =========================
+   Project Status
+========================= */
+
+.project-chart-card {
+  @apply min-h-[220px];
+}
+
+.chart-content {
+  @apply mt-5 flex items-center justify-between gap-6;
+}
+
+/* =========================
+   Donut Chart
+========================= */
+
+.donut-chart {
+  @apply relative flex h-[200px] w-[200px] min-w-[125px]
+    items-center justify-center rounded-full;
+}
+
+.donut-hole {
+  @apply absolute inset-[18px] rounded-full bg-[#321638];
+}
+
+.donut-center {
+  @apply relative z-10 flex flex-col items-center justify-center;
+}
+
+.donut-total {
+  @apply text-2xl font-bold text-white;
+}
+
+.donut-label {
+  @apply text-xs text-gray-400;
+}
+
+/* =========================
+   Legend
+========================= */
+
+.chart-legend {
+  @apply flex flex-1 flex-col gap-2.5;
+}
+
+.legend-item {
+  @apply grid grid-cols-[15px_90px_30px]
+    items-center gap-2 text-sm text-gray-300;
+}
+
+.legend-item strong {
+  @apply text-white;
+}
+
+/* =========================
+   Legend Dots
+========================= */
+
+.legend-dot {
+  @apply h-[9px] w-[9px] rounded-full;
+}
+
+.pending-dot {
+  @apply bg-[#f59e0b];
+}
+
+.progress-dot {
+  @apply bg-[#8b5cf6];
+}
+
+.completed-dot {
+  @apply bg-[#10b981];
+}
