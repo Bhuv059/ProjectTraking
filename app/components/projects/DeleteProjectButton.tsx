@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Trash } from "lucide-react";
 
-import { deleteProject } from "@/app/lib/project";
+import { deleteProject } from "@/app/lib/projects/project";
 import Dialog from "@/app/components/ui/Dialog";
-import "../../styles/deleteProjectButton.css";
+import "@/app/styles/deleteProjectButton.css";
 
 interface DeleteProjectButtonProps {
   projectId: string;
@@ -41,7 +42,7 @@ export default function DeleteProjectButton({ projectId }: DeleteProjectButtonPr
   return (
     <div className="flex justify-items-end  delete-project-button">
       <button type="button" onClick={() => setShowDialog(true)} className="delete-button">
-        Delete
+        <Trash className="lucid-icon" />
       </button>
 
       <Dialog

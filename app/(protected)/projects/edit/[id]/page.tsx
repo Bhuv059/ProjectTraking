@@ -1,6 +1,6 @@
 import DeleteProjectButton from "@/app/components/projects/DeleteProjectButton";
 import ProjectForm from "@/app/components/projects/ProjectForm";
-import { EditProjectPageProps } from "@/app/lib/project";
+import { EditProjectPageProps } from "@/app/lib/projects/project";
 
 export default async function EditProjectPage({ params }: EditProjectPageProps) {
   const { id } = await params;
@@ -13,9 +13,6 @@ export default async function EditProjectPage({ params }: EditProjectPageProps) 
             <h1 className="page-title">Edit Project</h1>
             <p className="page-description">Update your project details.</p>
           </div>
-        </div>
-        <div className="">
-          <DeleteProjectButton projectId={id} />
         </div>
       </div>
 

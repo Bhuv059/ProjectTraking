@@ -1,4 +1,5 @@
 import { prisma } from "@/app/lib/prisma";
+import { loggedInUser } from "@/app/lib/projects/auth";
 
 interface RouteContext {
   params: Promise<{
@@ -8,13 +9,18 @@ interface RouteContext {
 
 export async function GET(request: Request, { params }: RouteContext) {
   try {
+    const { user, response } = await loggedInUser();
+
+    if (response) return response;
+
     const { id } = await params;
 
     console.log("GET single project:", id);
 
-    const project = await prisma.project.findUnique({
+    const project = await prisma.project.findFirst({
       where: {
         id,
+        userId: user.id,
       },
     });
 
@@ -36,8 +42,25 @@ export async function GET(request: Request, { params }: RouteContext) {
 // UPDATE project
 export async function PUT(request: Request, { params }: RouteContext) {
   try {
+    const { user, response } = await loggedInUser();
+
+    if (response) return response;
+
     const { id } = await params;
 
+    // Find project belonging to logged-in user
+    const existingProject = await prisma.project.findFirst({
+      where: {
+        id,
+        userId: user.id,
+      },
+    });
+
+    if (!existingProject) {
+      return Response.json({ error: "Project not found" }, { status: 404 });
+    }
+
+    // Update project
     const body = await request.json();
 
     let status = body.status;
@@ -53,16 +76,14 @@ export async function PUT(request: Request, { params }: RouteContext) {
     }
 
     const project = await prisma.project.update({
-      where: {
-        id,
-      },
+      where: { id },
       data: {
         name: body.name,
         client: body.client,
         description: body.description || null,
         value: Number(body.value),
-        status: body.status,
-        progress: Number(body.progress ?? 0),
+        status,
+        progress,
         dueDate: body.dueDate || null,
       },
     });
@@ -84,10 +105,17 @@ export async function PUT(request: Request, { params }: RouteContext) {
 
 export async function DELETE(request: Request, { params }: RouteContext) {
   try {
+    const { user, response } = await loggedInUser();
+
+    if (response) return response;
+
     const { id } = await params;
 
-    const project = await prisma.project.findUnique({
-      where: { id },
+    const project = await prisma.project.findFirst({
+      where: {
+        id,
+        userId: user.id,
+      },
     });
 
     if (!project) {

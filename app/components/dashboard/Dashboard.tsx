@@ -1,9 +1,19 @@
 import "@/app/styles/dashboard.css";
 import { prisma } from "@/app/lib/prisma";
-import { ProjectStatus } from "@/app/lib/project";
+import { loggedInUser } from "@/app/lib/projects/auth";
+import { ProjectStatus } from "@/app/lib/projects/project";
+import { redirect } from "next/navigation";
 
 export default async function Dashboard() {
-  const projects = await prisma.project.findMany();
+  const { user, response } = await loggedInUser();
+
+  if (response || !user) {
+    redirect("/login");
+  }
+
+  const projects = await prisma.project.findMany({
+    where: { userId: user.id },
+  });
 
   const totalProjects = projects.length;
 
@@ -33,31 +43,59 @@ export default async function Dashboard() {
 
   return (
     <div className="dashboard-container">
-      {/* Header */}
       <div className="dashboard-header">
         <h1 className="dashboard-title">Dashboard</h1>
-
         <p className="dashboard-description">Manage your projects and track your progress.</p>
       </div>
 
       <div className="dashboard-content">
-        {/* Project Status */}
+        <div className="stats-grid">
+          <div className="stat-card">
+            <p className="stat-label">Total</p>
+            <p className="stat-value">{totalProjects}</p>
+          </div>
+
+          <div className="stat-card">
+            <p className="stat-label">Pending</p>
+            <p className="stat-value">{pending}</p>
+          </div>
+
+          <div className="stat-card">
+            <p className="stat-label">In progress</p>
+            <p className="stat-value">{inProgress}</p>
+          </div>
+
+          <div className="stat-card">
+            <p className="stat-label">Completed</p>
+            <p className="stat-value">{completed}</p>
+          </div>
+
+          <div className="stat-card">
+            <p className="stat-label">Completed projects</p>
+            <p className="stat-value">
+              {completed}/{totalProjects}
+            </p>
+          </div>
+
+          <div className="stat-card">
+            <p className="stat-label">Completion rate</p>
+            <p className="stat-value">{totalProjects > 0 ? ((completed / totalProjects) * 100).toFixed(1) : 0}%</p>
+          </div>
+        </div>
+
         <div className="stat-card project-chart-card">
           <p className="stat-label">Project Status</p>
 
           <div className="chart-content">
-            {/* Donut */}
             <div className="donut-chart" style={{ background: chartBackground }}>
               <div className="donut-hole" />
 
               <div className="donut-center">
                 <span className="donut-total">{totalProjects}</span>
-
                 <span className="donut-label">Projects</span>
               </div>
             </div>
 
-            {/* Legend */}
             <div className="chart-legend">
               <div className="legend-item">
                 <span className="legend-dot pending-dot" />
@@ -80,15 +118,8 @@ export default async function Dashboard() {
           </div>
         </div>
 
-        {/* Total Projects */}
         <div className="stat-card">
-          <p className="stat-label">Total Projects</p>
-          <p className="stat-value">{totalProjects}</p>
-        </div>
-
-        {/* Total Value */}
-        <div className="stat-card">
-          <p className="stat-label">Total Value</p>
+          <p className="stat-label">Total Project Value</p>
           <p className="stat-value">€{totalValue.toLocaleString()}</p>
         </div>
       </div>

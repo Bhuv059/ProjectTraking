@@ -9,13 +9,21 @@
 }
 
 .form-label {
-  @apply mb-2 block text-sm text-gray-300;
+  @apply mb-2   block text-sm text-gray-300 border-2 border-white/10 p-6 rounded-xl;
+}
+
+.form-data-label {
+  @apply mb-2   block text-sm items-center  text-teal-300 border-0 border-white/10 p-6 rounded-xl bg-black/20;
 }
 
 .form-input {
   @apply w-full rounded-lg border border-white/10 bg-black/20
     px-4 py-3 text-white outline-none
     focus:border-teal-500;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
 }
 
 .form-select {
@@ -39,17 +47,20 @@
 }
 
 .cancel-button {
-  @apply rounded-lg bg-white/5 px-5 py-3 text-gray-300
+  @apply h-10 rounded-lg bg-white/5 px-5 py-3 text-gray-300 transition
     hover:bg-white/10;
 }
 
-.submit-button {
-  @apply rounded-lg bg-teal-600 px-5 py-3 font-medium text-white
-    hover:bg-teal-500;
+.delete-project-button {
+  @apply h-10 rounded-lg bg-teal-600 px-5 text-sm font-medium
+    text-white transition;
+
+  @apply hover:bg-red-500;
 }
 
-.delete-project-button {
-  @apply rounded-lg bg-red-600 px-5 py-3 font-medium text-black
-    transition
-    hover:bg-red-100 hover:text-gray-700;
+.submit-button {
+  @apply h-10 rounded-lg bg-teal-600 px-5 text-sm font-medium
+    text-white transition;
+
+  @apply hover:bg-teal-500;
 }

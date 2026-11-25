@@ -1,11 +1,11 @@
 @reference "./globals.css";
 
-/* =========================
+/* ================================
    Dashboard
-========================= */
+================================ */
 
 .dashboard-container {
-  @apply mb-6 w-full max-w-[680px];
+  @apply w-full max-w-6xl;
 }
 
 .dashboard-header {
@@ -13,48 +13,51 @@
 }
 
 .dashboard-title {
-  @apply text-3xl font-bold text-white;
+  @apply text-3xl font-bold tracking-tight text-white;
 }
 
 .dashboard-description {
-  @apply mt-2 text-gray-400;
+  @apply mt-2 text-gray-800;
 }
 
 .dashboard-content {
   @apply flex w-full flex-col gap-6;
 }
 
-/* =========================
-   Cards
-========================= */
+/* ================================
+   Statistics Cards
+================================ */
+.stats-grid {
+  @apply grid w-full grid-cols-4 gap-4;
+}
 
 .stat-card {
-  @apply rounded-xl border border-white/10 bg-white/5 p-6;
+  @apply w-full rounded-xl border border-white/10 bg-white/5 p-5;
 }
 
 .stat-label {
-  @apply text-sm text-gray-400;
+  @apply text-sm font-medium text-gray-50;
 }
 
 .stat-value {
-  @apply mt-2 text-3xl font-bold text-white;
+  @apply mt-2 text-3xl font-bold tracking-tight text-teal-400;
 }
 
-/* =========================
+/* ================================
    Project Status
-========================= */
+================================ */
 
 .project-chart-card {
   @apply min-h-[220px];
 }
 
 .chart-content {
-  @apply mt-5 flex items-center justify-between gap-6;
+  @apply mt-6 flex w-full items-center justify-between gap-8;
 }
 
-/* =========================
+/* ================================
    Donut Chart
-========================= */
+================================ */
 
 .donut-chart {
   @apply relative flex h-[200px] w-[200px] min-w-[125px]
@@ -74,15 +77,15 @@
 }
 
 .donut-label {
-  @apply text-xs text-gray-400;
+  @apply text-xs text-gray-800;
 }
 
-/* =========================
+/* ================================
    Legend
-========================= */
+================================ */
 
 .chart-legend {
-  @apply flex flex-1 flex-col gap-2.5;
+  @apply flex flex-1 flex-col gap-3;
 }
 
 .legend-item {
@@ -91,12 +94,12 @@
 }
 
 .legend-item strong {
-  @apply text-white;
+  @apply font-semibold text-white;
 }
 
-/* =========================
+/* ================================
    Legend Dots
-========================= */
+================================ */
 
 .legend-dot {
   @apply h-[9px] w-[9px] rounded-full;
@@ -112,4 +115,55 @@
 
 .completed-dot {
   @apply bg-[#10b981];
+}
+
+/* ================================
+   Responsive
+================================ */
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    @apply max-w-full;
+  }
+
+  .dashboard-header {
+    @apply mb-6;
+  }
+
+  .dashboard-title {
+    @apply text-2xl;
+  }
+
+  .chart-content {
+    @apply flex-col items-center gap-6;
+  }
+
+  .chart-legend {
+    @apply w-full;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-title {
+    @apply text-xl;
+  }
+
+  .donut-chart {
+    @apply h-[170px] w-[170px];
+  }
+}
+@media (max-width: 1023px) {
+  .stats-grid {
+    @apply grid-cols-2;
+  }
+}
+
+@media (max-width: 639px) {
+  .stats-grid {
+    @apply grid-cols-2 gap-3;
+  }
+
+  .stat-card {
+    @apply p-4;
+  }
 }

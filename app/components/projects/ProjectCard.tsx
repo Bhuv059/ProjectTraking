@@ -9,11 +9,12 @@ interface ProjectCardProps {
   status: string;
   progress: number;
   value: string;
+  due: string | null;
 }
 
-export default function ProjectCard({ name, id, client, status, progress, value }: ProjectCardProps) {
+export default function ProjectCard({ name, id, client, status, progress, value, due }: ProjectCardProps) {
   return (
-    <Link href={`/projects/edit/${id}`} className="project-card">
+    <Link href={`/projects/${id}`} className="project-card">
       <div className="project-card-wrapper">
         <div className="project-header">
           <div>
@@ -37,6 +38,7 @@ export default function ProjectCard({ name, id, client, status, progress, value 
 
         <div className="project-footer">
           <span className="project-value">{value}</span>
+          <span className="project-value">{due}</span>
         </div>
       </div>
     </Link>

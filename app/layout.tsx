@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import "@/app/styles/globals.css";
-
-import AppLayout from "@/app/components/layout/AppLayout";
+import ToastProvider from "@/app/components/ui/ToastProvider";
 
 export const metadata: Metadata = {
   title: "ProjectTracker",
   description: "Project management dashboard",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -16,7 +15,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AppLayout>{children}</AppLayout>
+        <ToastProvider />
+        {children}
       </body>
     </html>
   );
